@@ -11,7 +11,6 @@ using System.Xml.Serialization;
 
 namespace Server
 {
-    [Serializable()]
 
     class Program
     {
@@ -27,6 +26,7 @@ namespace Server
             listener.Bind(localEndPoint);
             listener.Listen(100);
             Cmaker();
+            Console.WriteLine(listOfCelsius.Count);
             Save();
             /*
             while (true)
@@ -81,7 +81,6 @@ namespace Server
             Random rnd = new Random();
             int num = rnd.Next(-10, 40);
             int id = rnd.Next(-200, 200);
-            List<Celsius> listOfCelsius = new List<Celsius>();
             DateTime now = DateTime.Now;
             int sec = now.Hour * 3600 + now.Minute * 60 + now.Second;
             num = rnd.Next(-10, 40);
@@ -128,6 +127,7 @@ namespace Server
             
             foreach (var node in partNodes)
             {
+                Celsius c = new Celsius();
 
             }
 

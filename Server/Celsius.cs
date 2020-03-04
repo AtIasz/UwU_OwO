@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Server
 {
-    class Celsius
+    public class Celsius : ISerializable
     {
-        int _id { get; set; }
-        int _value { get; set; }
-        int _timeInSeconds { get; set; }
+        public int _id { get; set; }
+        public int _value { get; set; }
+        public int _timeInSeconds { get; set; }
         public Celsius(int id,int value,int timeInSeconds)
         {
             _id = id;
@@ -19,5 +20,12 @@ namespace Server
         {
 
         }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }
