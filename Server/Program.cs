@@ -25,10 +25,10 @@ namespace Server
             listOfCelsius = new List<Celsius>();
             listener.Bind(localEndPoint);
             listener.Listen(100);
-            Cmaker();
-            Console.WriteLine(listOfCelsius.Count);
-            Save();
-            /*
+            //Cmaker();
+            //Console.WriteLine(listOfCelsius.Count);
+            //Save();
+            
             while (true)
             {
                 allDone.Reset();
@@ -38,9 +38,20 @@ namespace Server
 
                 allDone.WaitOne();
             }
-            */
+            
         }
-
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
         private static void AcceptCallback(IAsyncResult ar)
         {
             allDone.Set();
@@ -54,6 +65,7 @@ namespace Server
             byte[] buff = new byte[1024];
             int bytesReads = client.Receive(buff);
 
+            Console.WriteLine("Buff "+buff);
             if (bytesReads < buff.Length)
             {
                 Random rnd = new Random();
